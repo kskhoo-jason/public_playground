@@ -1,0 +1,28 @@
+name: Get data
+description: Get and preprocess data for model traing
+
+inputs:
+    - {name: dataset_id, description: 'Vertex AI Image Dataset ID', type: String}
+    - {name: bucket_name, description: 'GCS Bucket Name', type: String}
+    - {name: image_width, description: 'Image Width reshape for trainer', type: Integer}
+    - {name: image_height, description: 'Image Height reshape for trainer', type: Integer}
+    
+outputs:
+    - {name: train_data, description: 'Training Dataset ', type: Dataset}
+    - {name: train_label, description: 'Training Labels', type: Dataset}
+    - {name: test_data, description: 'Test Dataset', type: Dataset}
+    - {name: test_label, description: 'Test Label', type: Dataset}
+
+implementation:
+    container:
+        image: us-central1-docker.pkg.dev/smu-mle-ay2122-t3-project/projectdockerrepo/getdata:latest
+        command: [python,  /app/get_data.py,
+            --dataset_id, {inputValue: dataset_id},
+            --bucket_name, {inputValue: bucket_name},
+            --image_width, {inputValue: image_width},
+            --image_height, {inputValue: image_height},
+            --train_data, {outputPath: train_data},
+            --train_label, {outputPath: train_label},
+            --test_data, {outputPath: test_data},
+            --test_label, {outputPath: test_label},
+        ]
