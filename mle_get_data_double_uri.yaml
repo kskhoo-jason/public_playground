@@ -1,5 +1,5 @@
 name: Get data
-description: Get and preprocess data for model traing
+description: Get train and test data and preprocess for model training
 
 inputs:
     - {name: train_dataset_id, description: 'Vertex AI Image Dataset ID for training', type: String}
@@ -16,8 +16,8 @@ outputs:
 
 implementation:
     container:
-        image: us-central1-docker.pkg.dev/smu-mle-ay2122-t3-project/projectdockerrepo/getdata:latest
-        command: [python,  /app/get_data.py,
+        image: us-central1-docker.pkg.dev/smu-mle-ay2122-t3-project/projectdockerrepo/getdatadouble:latest
+        command: [python,  /app/get_data_double_uri.py,
             --train_dataset_id, {inputValue: train_dataset_id},
             --test_dataset_id, {inputValue: test_dataset_id},
             --bucket_name, {inputValue: bucket_name},
