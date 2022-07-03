@@ -16,7 +16,7 @@ outputs:
 implementation:
     container:
         image: us-central1-docker.pkg.dev/smu-mle-ay2122-t3-project/projectdockerrepo/getdata_single:latest
-        command: [python,  /app/get_data.py,
+        command: [python,  /app/get_data_single.py,
             --dataset_id, {inputValue: dataset_id},
             --bucket_name, {inputValue: bucket_name},
             --image_width, {inputValue: image_width},
